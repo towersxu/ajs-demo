@@ -81,3 +81,7 @@
 .user_login .error{
     border: 1px solid #fedddc !important;
 }
+.tipInfo{
+    font-weight: lighter;
+    color: red;
+}
