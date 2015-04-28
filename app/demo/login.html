@@ -1,21 +1,21 @@
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-lg-6 col-md-6 hidden-xs">
         <img src="./img/login.png" class="img-responsive">
     </div>
     <div class="user_login col-lg-4 col-md-4 col-xs-12">
         <h3>帐号登陆</h3>
         <div>
-            <input type="text" tabindex="1" placeholder="输入用户名/邮箱" class="key user_name ">
-            <input type="password" tabindex="2" placeholder="输入密码" class="user_name lock">
+            <input type="text" tabindex="1" placeholder="输入邮箱" class="key user_name " ng-model="userinfo.username" >
+            <input type="password" tabindex="2" placeholder="输入密码" class="user_name lock" ng-model="userinfo.password">
 
             <div class="row">
                 <span class="col-xs-6 col-md-6 col-lg-6">
-                    <input type="checkbox" name="remeberMe" id="remeberMe" value="true" tabindex="3">
+                    <input  name="remeberMe" id="remeberMe" type="checkbox"  ng-model="isSavePw" tabindex="3">
                     <label for="remeberMe">下次自动登陆</label>
                 </span>
                 <a class="col-xs-6 col-md-6 col-lg-6" href="http://www.baidu.com">忘记密码</a>
             </div>
-            <input type="button" value="登陆" class="login">
+            <input type="button" value="登陆" class="login" ng-click="loginHandle()">
         </div>
         <div class="line"></div>
         <div class="third-part">

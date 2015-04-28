@@ -6,7 +6,8 @@
 
 var demoApp = angular.module('demoApp', [
   'ngRoute',
-  'demoControllers'
+  'demoControllers',
+  'ngCookies'
 ]);
 demoApp.config(['$routeProvider',
   function ($routeProvider) {
