@@ -8,13 +8,17 @@
             <label ng-model="tipInfo" class="tipInfo">{{tipInfo}}</label>
             <input type="text" tabindex="1" placeholder="输入邮箱/手机号" class="key user_name" ng-blur="clearTipInfo()" ng-minlength="5" ng-model="userinfo.username" >
             <input type="password" tabindex="2" placeholder="输入密码" class="user_name lock" ng-blur="clearTipInfo()" ng-model="userinfo.password">
-
+            <div class="verifyCode">
+                <input type="text" class="col-lg-4" placeholder="输入验证码">
+                <img src="img/verify.ashx" class="col-lg-4">
+                <a class="col-lg-4 verifyUrl">看不清，换一张？</a>
+            </div>
             <div class="row">
                 <span class="col-xs-6 col-md-6 col-lg-6">
                     <input  name="remeberMe" id="remeberMe" type="checkbox"  ng-model="isSavePw" tabindex="3">
                     <label for="remeberMe">下次自动登陆</label>
                 </span>
-                <a class="col-xs-6 col-md-6 col-lg-6" href="http://www.baidu.com">忘记密码</a>
+                <a class="col-xs-4 col-md-4 col-lg-4" href="http://www.baidu.com">忘记密码</a>
             </div>
             <input type="button" value="登陆" class="login" ng-click="loginHandle()">
         </div>
