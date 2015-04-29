@@ -1,15 +1,16 @@
 /**
- * Created by taox on 15-4-27.
+ * @fileOverview app.js
+ * @author taox
+ * @version 0.1
  */
 
 'use strict';
 
-var demoApp = angular.module('demoApp', [
+angular.module('demoApp', [
   'ngRoute',
   'demoControllers',
   'ngCookies'
-]);
-demoApp.config(['$routeProvider',
+]).config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/home',{
       templateUrl:'demo/home.html',
