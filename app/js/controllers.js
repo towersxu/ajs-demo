@@ -9,12 +9,19 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies',
     $scope.orderProp = 'login';
   }]);
 
-demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookies', '$cookieStore',
-  function ($scope, $http, $cookies, $cookieStore) {
-    $http.get('data/verify.json').success(function (data) {
-      $scope.location = data;
-    });
-
+demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
+  function ($scope, $http, $cookieStore) {
+    /*设置登陆提示信息*/
+    $scope.tipInfoObject = {
+      "N":"",
+      "UE":"帐号或者密码不正确！",
+      "VE":"验证码错误！",
+      "NE":"网络出错！"
+    };
+    $scope.tipInfo = $scope.tipInfoObject[$cookieStore.get('errorType')];
+    $scope.clearTipInfo = function(){
+      $scope.tipInfo = "";
+    };
     /*记住帐号和密码功能。*/
     $scope.userinfo = $cookieStore.get('userinfo') || {};
     $scope.isSavePw = !!$scope.userinfo.password;  //两次取反将字符串转换为boolean.
@@ -25,6 +32,12 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookies', '$cookie
         userInfo.password = $scope.userinfo.password;
       }
       $cookieStore.put('userinfo', userInfo);
-    }
-
-  }]);
+      $cookieStore.put('errorType', "NE");
+      window.location.reload();
+    };
+    /*设在验证码*/
+    $http.get('data/verify.json').success(function (data) {
+      $scope.location = data;
+    });
+  }
+]);

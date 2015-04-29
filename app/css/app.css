@@ -20,7 +20,6 @@
     display: block;
     background-color: #d23f3a;
     width: 100%;
-    font-size: 1.25em;
     margin-bottom: 1.5em;
     height: 3em;
     border:none;
@@ -80,4 +79,14 @@
 }
 .user_login .error{
     border: 1px solid #fedddc !important;
+}
+.tipInfo{
+    font-weight: lighter;
+    color: red;
+}
+.verifyUrl{
+    display: block;
+    font-size: 0.5em;
+    cursor: pointer;
+    margin-bottom: 1em;
 }
