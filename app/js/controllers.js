@@ -7,28 +7,24 @@ var demoControllers = angular.module('demoControllers', []);
 demoControllers.controller('NavCtrl', ['$scope', '$cookieStore',
   function ($scope, $cookieStore) {
     $scope.userinfo = $cookieStore.get('userinfo');
-    console.log($scope.userinfo)
   }]);
 
 demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$http',
   function ($scope, $cookies, $cookieStore ,$http) {
     $scope.userinfo = $cookieStore.get('userinfo');
-    console.log($scope.userinfo);
     $scope.user = $cookies.userinfo;
-    console.log($scope.user);
 
-    //使用jsonp获取url
+    //使用jsonp获取需要设置script的url地址。
     $scope.token = $cookieStore.get('token');
     if(!$scope.token){
-      var url = "/SSOServer/server/login?callback=JSON_CALLBACK&token="+$scope.token;
+      var url = "/setCookie?callback=JSON_CALLBACK&token="+$scope.token;
       $http.jsonp(url).success(function(data) {
-        console.log(data);
         data= JSON.parse(data);
         $scope.setScript(data.url);
       }).error(function(data){
-        data= data ||'{"url":["http://libs.baidu.com/jquery/1.9.1/jquery.min.js","http://libs.baidu.com/jquery/1.7.2/jquery.min.js"]}';
-        data= JSON.parse(data);
-        $scope.setScript(data.url);
+        //data= data ||'{"url":["http://libs.baidu.com/jquery/1.9.1/jquery.min.js","http://libs.baidu.com/jquery/1.7.2/jquery.min.js"]}';
+        //data= JSON.parse(data);
+        //$scope.setScript(data.url);
       });
     }else{
       console.log("no token!");
@@ -46,7 +42,7 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$h
     }
   }]);
 demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
-  function ($scope, $http, $cookieStore) {
+  function ($scope, $http, $cookieStore ) {
     /*设置登陆提示信息*/
     $scope.tipInfoObject = {
       "N": "",
@@ -55,6 +51,7 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
       "NE": "网络出错！"
     };
     $scope.tipInfo = $scope.tipInfoObject[$cookieStore.get('errorType')];
+    $scope.domain = $cookieStore.get('url');
     $scope.clearTipInfo = function () {
       $scope.tipInfo = "";
     };
