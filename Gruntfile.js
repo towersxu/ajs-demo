@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['app/js/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'app/dist/<%= pkg.name %>.js'
       }
     },
     jsdoc : {
@@ -29,7 +29,20 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'app/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
+      }
+    },
+    bower: {
+      install: {
+        options: {
+          targetDir: './app/lib',
+          layout: 'byType',
+          install: true,
+          verbose: false,
+          cleanTargetDir: false,
+          cleanBowerDir: false,
+          bowerOptions: {}
         }
       }
     }
@@ -41,7 +54,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.loadNpmTasks('grunt-jsdoc');
+
+  grunt.loadNpmTasks('grunt-bower-task');
   // 默认被执行的任务列表。
-  grunt.registerTask('default', ['concat','uglify','jsdoc']);
+  grunt.registerTask('default', ['concat','uglify','jsdoc','bower']);
 
 };

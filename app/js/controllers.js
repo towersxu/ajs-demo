@@ -7,7 +7,7 @@ var demoControllers = angular.module('demoControllers', []);
 demoControllers.controller('NavCtrl', ['$scope', '$cookieStore',
   function ($scope, $cookieStore) {
     $scope.userinfo = $cookieStore.get('userinfo');
-    console.log($scope.username)
+    console.log($scope.userinfo)
   }]);
 
 demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$http',
@@ -18,14 +18,32 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$h
     console.log($scope.user);
 
     //使用jsonp获取url
-    $http.jsonp("/SSOServer/server/login?callback=JSON_CALLBACK",{
-      "token": $cookieStore.get('token')
-    }).success(function(data) {
-      console.log(data);
-    }).error(function(data){
-      console.log(data);
-    });
-
+    $scope.token = $cookieStore.get('token');
+    if(!$scope.token){
+      var url = "/SSOServer/server/login?callback=JSON_CALLBACK&token="+$scope.token;
+      $http.jsonp(url).success(function(data) {
+        console.log(data);
+        data= JSON.parse(data);
+        $scope.setScript(data.url);
+      }).error(function(data){
+        data= data ||'{"url":["http://libs.baidu.com/jquery/1.9.1/jquery.min.js","http://libs.baidu.com/jquery/1.7.2/jquery.min.js"]}';
+        data= JSON.parse(data);
+        $scope.setScript(data.url);
+      });
+    }else{
+      console.log("no token!");
+    }
+    $scope.setScript = function(url){
+      var dFrag = document.createDocumentFragment();
+      for(var i = 0;i < url.length; i++){
+        var script = document.createElement("script");
+        script.type= 'text/javascript';
+        script.src= url[i];
+        dFrag.appendChild(script);
+      }
+      var head= document.getElementsByTagName('head')[0];
+      head.appendChild(dFrag);
+    }
   }]);
 demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
   function ($scope, $http, $cookieStore) {
