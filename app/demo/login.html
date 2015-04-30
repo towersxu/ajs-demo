@@ -5,6 +5,7 @@
     <div class="user_login col-lg-4 col-md-4 col-xs-12">
         <h3>帐号登陆</h3>
         <div>
+            <form ng-submit="loginHandle()">
             <label ng-model="tipInfo" class="tipInfo">{{tipInfo}}</label>
             <input type="text" tabindex="1" placeholder="输入邮箱/手机号" class="key user_name" ng-blur="clearTipInfo()" ng-minlength="5" ng-model="userinfo.username" >
             <input type="password" tabindex="2" placeholder="输入密码" class="user_name lock" ng-blur="clearTipInfo()" ng-model="userinfo.password">
@@ -20,7 +21,8 @@
                 </span>
                 <a class="col-xs-4 col-md-4 col-lg-4" href="http://www.baidu.com">忘记密码</a>
             </div>
-            <input type="button" value="登陆" class="login" ng-click="loginHandle()">
+            <input type="submit" value="登陆" class="login">
+            </form>
         </div>
         <div class="line"></div>
         <div class="third-part">
