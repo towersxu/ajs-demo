@@ -10,12 +10,22 @@ demoControllers.controller('NavCtrl', ['$scope', '$cookieStore',
     console.log($scope.username)
   }]);
 
-demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore',
-  function ($scope, $cookies, $cookieStore) {
+demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$http',
+  function ($scope, $cookies, $cookieStore ,$http) {
     $scope.userinfo = $cookieStore.get('userinfo');
     console.log($scope.userinfo);
     $scope.user = $cookies.userinfo;
     console.log($scope.user);
+
+    //使用jsonp获取url
+    $http.jsonp("/SSOServer/server/login?callback=JSON_CALLBACK",{
+      "token": $cookieStore.get('token')
+    }).success(function(data) {
+      console.log(data);
+    }).error(function(data){
+      console.log(data);
+    });
+
   }]);
 demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
   function ($scope, $http, $cookieStore) {
@@ -40,22 +50,7 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
         userInfo.password = $scope.userinfo.password;
       }
       $cookieStore.put('userinfo', userInfo);
-      //$cookieStore.put('errorType', "NE");
-      //window.location.href = "#home";
-      $http({
-        method:'POST',
-        url:'/SSOServer/server/login',
-        data:{
-          "userAccount":$scope.userinfo.username,
-          "userPwd" : $scope.userinfo.password,
-          "url":"http://www.a.com"
-        }
-      }).success(function(data){
-        console.log("login msg ===================》");
-        console.log(data);
-        console.log("《===========================");
-        $scope.tipInfo = $scope.tipInfoObject[data];
-      });
+      return false;
     };
     /*设在验证码*/
     $http.get('data/verify.json').success(function (data) {
