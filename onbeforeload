@@ -1,0 +1,8 @@
+window.addEventListener?window.addEventListener("onbeforeunload",staybounce,false):window.attachEvent&&window.attachEvent("onbeforeunload",staybounce)
+
+dt=new Date;
+var g=dt.getTime(),a=new Image(1,1);
+a.src="http://trace.qq.com:80/collect?pj=8887&url="+
+    escape(location.href)+"&t="+parseInt((g-pvStartTime)/1E3)+
+    "&v="+pvClickCount+"&u="+trimUin(pgvGetCookieByName("o_cookie"));
+delete a

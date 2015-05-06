@@ -1,0 +1,101 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.3.6
+3 info using node@v0.10.36
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/home/taox/workspace/ajs-demo',
+5 verbose install   [ 'karma',
+5 verbose install     'karma-chrome-launcher',
+5 verbose install     'karma-jasmine',
+5 verbose install     'protractor',
+5 verbose install     'http-server',
+5 verbose install     'tmp',
+5 verbose install     'bower',
+5 verbose install     'shelljs',
+5 verbose install     'grunt',
+5 verbose install     'grunt-contrib-uglify',
+5 verbose install     'grunt-contrib-concat',
+5 verbose install     'grunt-bower-Task',
+5 verbose install     'grunt-jsdoc' ] ]
+6 info preinstall ajs-demo@0.0.0
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping karma@^0.12.16 /home/taox/workspace/ajs-demo
+9 verbose already installed skipping karma-chrome-launcher@^0.1.4 /home/taox/workspace/ajs-demo
+10 verbose already installed skipping karma-jasmine@^0.1.5 /home/taox/workspace/ajs-demo
+11 verbose already installed skipping protractor@~1.0.0 /home/taox/workspace/ajs-demo
+12 verbose already installed skipping http-server@^0.6.1 /home/taox/workspace/ajs-demo
+13 verbose already installed skipping tmp@0.0.23 /home/taox/workspace/ajs-demo
+14 verbose already installed skipping bower@^1.3.1 /home/taox/workspace/ajs-demo
+15 verbose already installed skipping shelljs@^0.2.6 /home/taox/workspace/ajs-demo
+16 verbose already installed skipping grunt@~0.4.5 /home/taox/workspace/ajs-demo
+17 verbose already installed skipping grunt-contrib-uglify@0.9.1 /home/taox/workspace/ajs-demo
+18 verbose already installed skipping grunt-contrib-concat@0.5.1 /home/taox/workspace/ajs-demo
+19 verbose cache add [ 'grunt-bower-Task@~0.4.0', null ]
+20 verbose cache add name=undefined spec="grunt-bower-Task@~0.4.0" args=["grunt-bower-Task@~0.4.0",null]
+21 verbose parsed url { protocol: null,
+21 verbose parsed url   slashes: null,
+21 verbose parsed url   auth: null,
+21 verbose parsed url   host: null,
+21 verbose parsed url   port: null,
+21 verbose parsed url   hostname: null,
+21 verbose parsed url   hash: null,
+21 verbose parsed url   search: null,
+21 verbose parsed url   query: null,
+21 verbose parsed url   pathname: 'grunt-bower-Task@~0.4.0',
+21 verbose parsed url   path: 'grunt-bower-Task@~0.4.0',
+21 verbose parsed url   href: 'grunt-bower-Task@~0.4.0' }
+22 verbose cache add name="grunt-bower-Task" spec="~0.4.0" args=["grunt-bower-Task","~0.4.0"]
+23 verbose parsed url { protocol: null,
+23 verbose parsed url   slashes: null,
+23 verbose parsed url   auth: null,
+23 verbose parsed url   host: null,
+23 verbose parsed url   port: null,
+23 verbose parsed url   hostname: null,
+23 verbose parsed url   hash: null,
+23 verbose parsed url   search: null,
+23 verbose parsed url   query: null,
+23 verbose parsed url   pathname: '~0.4.0',
+23 verbose parsed url   path: '~0.4.0',
+23 verbose parsed url   href: '~0.4.0' }
+24 verbose addNamed [ 'grunt-bower-Task', '~0.4.0' ]
+25 verbose addNamed [ null, '>=0.4.0-0 <0.5.0-0' ]
+26 verbose already installed skipping grunt-jsdoc@0.5.8 /home/taox/workspace/ajs-demo
+27 silly lockFile 81ec24c9-grunt-bower-Task-0-4-0 grunt-bower-Task@~0.4.0
+28 verbose lock grunt-bower-Task@~0.4.0 /home/taox/.npm/81ec24c9-grunt-bower-Task-0-4-0.lock
+29 silly addNameRange { name: 'grunt-bower-Task',
+29 silly addNameRange   range: '>=0.4.0-0 <0.5.0-0',
+29 silly addNameRange   hasData: false }
+30 verbose url raw grunt-bower-Task
+31 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-bower-Task' ]
+32 verbose url resolved https://registry.npmjs.org/grunt-bower-Task
+33 info trying registry request attempt 1 at 09:19:42
+34 http GET https://registry.npmjs.org/grunt-bower-Task
+35 http 404 https://registry.npmjs.org/grunt-bower-Task
+36 silly registry.get cb [ 404,
+36 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+36 silly registry.get     'content-type': 'application/json',
+36 silly registry.get     'cache-control': 'max-age=0',
+36 silly registry.get     'content-length': '51',
+36 silly registry.get     'accept-ranges': 'bytes',
+36 silly registry.get     date: 'Tue, 05 May 2015 01:19:42 GMT',
+36 silly registry.get     via: '1.1 varnish',
+36 silly registry.get     age: '0',
+36 silly registry.get     connection: 'keep-alive',
+36 silly registry.get     'x-served-by': 'cache-nrt6123-NRT',
+36 silly registry.get     'x-cache': 'MISS',
+36 silly registry.get     'x-cache-hits': '0',
+36 silly registry.get     'x-timer': 'S1430788782.495043,VS0,VE194' } ]
+37 silly lockFile 81ec24c9-grunt-bower-Task-0-4-0 grunt-bower-Task@~0.4.0
+38 silly lockFile 81ec24c9-grunt-bower-Task-0-4-0 grunt-bower-Task@~0.4.0
+39 error 404 'grunt-bower-Task' is not in the npm registry.
+39 error 404 You should bug the author to publish it
+39 error 404
+39 error 404 Note that you can also install from a
+39 error 404 tarball, folder, or http url, or git url.
+40 error System Linux 3.19.5-200.fc21.x86_64
+41 error command "node" "/usr/bin/npm" "install"
+42 error cwd /home/taox/workspace/ajs-demo
+43 error node -v v0.10.36
+44 error npm -v 1.3.6
+45 error code E404
+46 verbose exit [ 1, true ]

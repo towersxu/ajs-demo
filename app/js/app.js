@@ -18,6 +18,9 @@ angular.module('demoApp', [
     }).when('/login',{
       templateUrl:'demo/login.html',
       controller:'LoginCtrl'
+    }).when('/DeviceList',{
+      templateUrl:'demo/device-list.html',
+      controller:'DeviceList'
     }).otherwise({
       redirectTo:'/home'
     });

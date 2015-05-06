@@ -1,0 +1,11 @@
+
+<div class="table-responsive">
+    <table class="table">
+        <thead><th>上线设备</th><th>上线时间</th><th>强制下线</th></thead>
+        <tr ng-repeat="davice in davices">
+            <td>{{davice}}</td>
+            <td>2015-5-5</td>
+            <td><button ng-bind="$index+1" ng-click="forceLogout(davice,$index)">下线</button></td>
+        </tr>
+    </table>
+</div>

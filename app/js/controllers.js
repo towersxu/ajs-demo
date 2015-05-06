@@ -6,43 +6,49 @@ var demoControllers = angular.module('demoControllers', []);
 
 demoControllers.controller('NavCtrl', ['$scope', '$cookieStore',
   function ($scope, $cookieStore) {
-    $scope.userinfo = $cookieStore.get('userinfo');
-  }]);
+    $scope.$watch('userinfo', function (newValie, oldVale) {
+      if (newValie === oldVale) {
+        return;
+      }
+      $scope.userinfo = $cookieStore.get('userinfo');
+    })
+  }
+]);
 
-demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore','$http',
-  function ($scope, $cookies, $cookieStore ,$http) {
+demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$http',
+  function ($scope, $cookies, $cookieStore, $http) {
     $scope.userinfo = $cookieStore.get('userinfo');
-    $scope.user = $cookies.userinfo;
+    //$scope.user = $cookies.userinfo;
 
     //使用jsonp获取需要设置script的url地址。
-    $scope.token = $cookieStore.get('token');
-    if(!$scope.token){
-      var url = "/setCookie?callback=JSON_CALLBACK&token="+$scope.token;
-      $http.jsonp(url).success(function(data) {
-        data= JSON.parse(data);
+    $scope.token = $cookies.token;
+    if ($scope.token) {
+      var url = "/SSOServer/setCookie?callback=JSON_CALLBACK&token=" + $scope.token;
+      $http.jsonp(url).success(function (data) {
         $scope.setScript(data.url);
-      }).error(function(data){
-        //data= data ||'{"url":["http://libs.baidu.com/jquery/1.9.1/jquery.min.js","http://libs.baidu.com/jquery/1.7.2/jquery.min.js"]}';
-        //data= JSON.parse(data);
-        //$scope.setScript(data.url);
+      }).error(function (data) {
+        console.log("get domian error!");
       });
-    }else{
+    } else {
       console.log("no token!");
     }
-    $scope.setScript = function(url){
+    //动态创建<script>标签，用于设置其他域cookie。
+    $scope.setScript = function (urls) {
       var dFrag = document.createDocumentFragment();
-      for(var i = 0;i < url.length; i++){
+      for (var i = 0; i < urls.length; i++) {
         var script = document.createElement("script");
-        script.type= 'text/javascript';
-        script.src= url[i];
+        script.type = 'text/javascript';
+        script.src = urls[i];
         dFrag.appendChild(script);
       }
-      var head= document.getElementsByTagName('head')[0];
+      var head = document.getElementsByTagName('head')[0];
       head.appendChild(dFrag);
     }
-  }]);
-demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
-  function ($scope, $http, $cookieStore ) {
+  }
+]);
+
+demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$cookies', '$location',
+  function ($scope, $http, $cookieStore, $cookies, $location) {
     /*设置登陆提示信息*/
     $scope.tipInfoObject = {
       "N": "",
@@ -50,8 +56,9 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
       "VE": "验证码错误！",
       "NE": "网络出错！"
     };
-    $scope.tipInfo = $scope.tipInfoObject[$cookieStore.get('errorType')];
-    $scope.domain = $cookieStore.get('url');
+    $scope.tipInfo = $scope.tipInfoObject[$cookies.errorType];
+    $scope.domain = $location.search().origUrl || $location.host();
+
     $scope.clearTipInfo = function () {
       $scope.tipInfo = "";
     };
@@ -71,5 +78,31 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore',
     $http.get('data/verify.json').success(function (data) {
       $scope.location = data;
     });
+  }
+]);
+demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies',
+  function ($scope, $http, $cookies) {
+    $scope.token = $cookies.token;
+    $scope.davices = ["chrome","IE","firefox"];
+    if ($scope.token) {
+      var url = "/SSOServer/server/getBrowser?callback=JSON_CALLBACK&token=" + $scope.token;
+      $http.jsonp(url).success(function (data) {
+        $scope.davices = data;
+        console.log("获取设备返回的数据："+data);
+      }).error(function (data) {
+        console.log("获取数据失败!"+data);
+      });
+    }
+    $scope.forceLogout = function(browser,index){
+      console.log(arguments);
+      $scope.davices.splice(index,1);
+      var url = "/SSOServer/server/logoutBrowser?callback=JSON_CALLBACK&browser=" + browser;
+      $http.jsonp(url).success(function (data) {
+        $scope.davices = data;
+        console.log("获取设备返回的数据："+data);
+      }).error(function (data) {
+        console.log("获取数据失败!"+data);
+      });
+    }
   }
 ]);
