@@ -5,7 +5,7 @@
         <tr ng-repeat="davice in davices">
             <td>{{davice}}</td>
             <td>2015-5-5</td>
-            <td><button ng-bind="$index+1" ng-click="forceLogout(davice,$index)">下线</button></td>
+            <td><button  ng-click="forceLogout(davice,$index)">下线</button></td>
         </tr>
     </table>
 </div>

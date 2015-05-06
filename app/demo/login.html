@@ -7,7 +7,7 @@
         <div>
             <form ng-submit="loginHandle()" method="post" action="/SSOServer/server/login">
             <label ng-model="tipInfo" class="tipInfo">{{tipInfo}}</label>
-            <input name="userAccount" type="text" tabindex="1" placeholder="输入邮箱/手机号" class="key user_name" ng-blur="clearTipInfo()" ng-minlength="5" ng-model="userinfo.username" >
+            <input name="userAccount" type="text" tabindex="1" placeholder="输入邮箱/手机号" class="key user_name" ng-blur="clearTipInfo()" ng-model="userinfo.username" >
             <input name="userPwd" type="password" tabindex="2" placeholder="输入密码" class="user_name lock" ng-blur="clearTipInfo()" ng-model="userinfo.password">
             <div class="verifyCode">
                 <input type="text" class="col-lg-4" placeholder="输入验证码">
