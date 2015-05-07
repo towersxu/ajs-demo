@@ -15,9 +15,6 @@ angular.module('demoApp', [
     $routeProvider.when('/home',{
       templateUrl:'demo/home.html',
       controller:'HomeCtrl'
-    }).when('/login',{
-      templateUrl:'demo/login.html',
-      controller:'LoginCtrl'
     }).when('/DeviceList',{
       templateUrl:'demo/device-list.html',
       controller:'DeviceList'
