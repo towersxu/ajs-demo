@@ -85,8 +85,8 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$
   }
 ]);
 
-demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$cookies', '$location','$rootScope',
-  function ($scope, $http, $cookieStore, $cookies, $location,$rootScope) {
+demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$cookies', '$location',
+  function ($scope, $http, $cookieStore, $cookies, $location) {
     /*设置登陆提示信息*/
     $scope.tipInfoObject = {
       "N": "",
