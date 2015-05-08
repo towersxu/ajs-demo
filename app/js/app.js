@@ -9,6 +9,7 @@
 angular.module('demoApp', [
   'ngRoute',
   'demoControllers',
+  'demoDirectives',
   'ngCookies'
 ]).config(['$routeProvider',
   function ($routeProvider) {

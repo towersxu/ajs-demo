@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
+    <title>JSDoc: Source: directives.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: app.js</h1>
+    <h1 class="page-title">Source: directives.js</h1>
     
     
 
@@ -26,29 +26,27 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * @fileOverview app.js
- * @author taox
- * @version 0.1
+ * Created by taox on 15-4-27.
  */
-
-'use strict';
-
-angular.module('demoApp', [
-  'ngRoute',
-  'demoControllers',
-  'demoDirectives',
-  'ngCookies'
-]).config(['$routeProvider',
-  function ($routeProvider) {
-    $routeProvider.when('/home',{
-      templateUrl:'demo/home.html',
-      controller:'HomeCtrl'
-    }).when('/DeviceList',{
-      templateUrl:'demo/device-list.html',
-      controller:'DeviceList'
-    }).otherwise({
-      redirectTo:'/home'
-    });
+var demoDirectives = angular.module('demoDirectives', []);
+demoDirectives.directive('header', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'demo/header.html'
+    //template: '&lt;div>Hi there&lt;/div>',
+    //replace: true
+  };
+});
+demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies',
+  function ($rootScope, $scope, $cookieStore, $cookies) {
+    var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
+    typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
+    if ($rootScope.userinfo) {
+      $scope.isHidden = false;
+      $scope.name = $rootScope.userinfo;
+    } else {
+      $scope.isHidden = true;
+    }
   }
 ]);</code></pre>
         </article>

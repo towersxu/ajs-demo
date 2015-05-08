@@ -12,15 +12,13 @@
 angular.module('demoApp', [
   'ngRoute',
   'demoControllers',
+  'demoDirectives',
   'ngCookies'
 ]).config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/home',{
       templateUrl:'demo/home.html',
       controller:'HomeCtrl'
-    }).when('/login',{
-      templateUrl:'demo/login.html',
-      controller:'LoginCtrl'
     }).when('/DeviceList',{
       templateUrl:'demo/device-list.html',
       controller:'DeviceList'
@@ -34,124 +32,105 @@ angular.module('demoApp', [
 
 var demoControllers = angular.module('demoControllers', []);
 
-demoControllers.controller('NavCtrl', ['$scope', '$cookieStore','$cookies','$http','$window','$rootScope',
-  function ($scope, $cookieStore ,$cookies ,$http ,$window,$rootScope) {
-    var userinfo = $cookies.userinfo;
-    userinfo ?$rootScope.userinfo = JSON.parse(userinfo) : $rootScope.userinfo = {};
-    $scope.userinfo = $rootScope.userinfo;
-    //$scope.logout = function() {
-    //  var url = "/SSOServer/logout?callback=JSON_CALLBACK&token=" + $scope.token;
-    //  $http.jsonp(url).success(function (data) {
-    //    $cookieStore.remove('userinfo');
-    //    $window.location.href="#login";
-    //  }).error(function (data) {
-    //    console.log("登出失败!");
-    //    $cookieStore.remove('userinfo');
-    //    $window.location.href="#login";
-    //  });
-    //}
-  }
-]);
 
 demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$http','$rootScope',
-  function ($scope, $cookies, $cookieStore, $http ,$rootScope) {
+  function ($scope, $cookies, $cookieStore, $http, $rootScope) {
+    $rootScope.coxUrl = "http://192.168.1.36:8080";
+
     $scope.userinfo = $rootScope.userinfo;
-    ////$scope.user = $cookies.userinfo;
-    //
-    ////使用jsonp获取需要设置script的url地址。
-    //$scope.token = $cookies.token;
-    //if ($scope.token) {
-    //  var url = "/SSOServer/setCookie?callback=JSON_CALLBACK&token=" + $scope.token;
-    //  $http.jsonp(url).success(function (data) {
-    //    $scope.setScript(data.url);
-    //  }).error(function (data) {
-    //    console.log("get domian error!");
-    //  });
-    //} else {
-    //  console.log("no token!");
-    //}
-    ////动态创建<script>标签，用于设置其他域cookie。
-    //$scope.setScript = function (urls) {
-    //  var dFrag = document.createDocumentFragment();
-    //  for (var i = 0; i < urls.length; i++) {
-    //    var script = document.createElement("script");
-    //    script.type = 'text/javascript';
-    //    script.src = urls[i];
-    //    dFrag.appendChild(script);
-    //  }
-    //  var head = document.getElementsByTagName('head')[0];
-    //  head.appendChild(dFrag);
-    //}
-  }
-]);
-
-demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$cookies', '$location',
-  function ($scope, $http, $cookieStore, $cookies, $location) {
-    /*设置登陆提示信息*/
-    $scope.tipInfoObject = {
-      "N": "",
-      "UE": "帐号或者密码不正确！",
-      "VE": "验证码错误！",
-      "NE": "网络出错！"
-    };
-    $scope.tipInfo = $scope.tipInfoObject[$cookies.errorType];
-    $scope.domain = $location.search().origUrl || $location.host();
-
-    $scope.clearTipInfo = function () {
-      $scope.tipInfo = "";
-    };
-    ///*记住帐号和密码功能。*/
-    $scope.userinfo = $cookieStore.get("uli") || {};
-    $scope.isSavePw = !!$scope.userinfo.password;  //两次取反将字符串转换为boolean.
-    $scope.loginHandle = function () {
-      var userInfo = {};
-      userInfo.username = $scope.userinfo.username;
-      if ($scope.isSavePw) {
-        userInfo.password = $scope.userinfo.password;
+    //使用jsonp获取需要设置script的url地址。
+    $scope.token = $cookies.token || $cookieStore.get("token");
+    if ($scope.token) {
+      $http.jsonp($rootScope.coxUrl +"/SSOServer/server/setCookie?callback=JSON_CALLBACK&token=" + $scope.token).success(function (data) {
+        $scope.setScript(data.url);
+      }).error(function (data) {
+      });
+    } else {
+    }
+    //动态创建<script>标签，用于设置其他域cookie。
+    $scope.setScript = function (urls) {
+      var dFrag = document.createDocumentFragment(),
+          head = document.getElementsByTagName('head')[0];
+      for (var i = 0; i < urls.length; i++) {
+        var script = document.createElement("script");
+        script.type = 'text/javascript';
+        script.src = urls[i];
+        dFrag.appendChild(script);
       }
-      $cookieStore.put('uli', userInfo);
-      $cookieStore.put('userinfo', userInfo);
-      console.log($cookieStore.get('uli'));
-      return false;
+      head.appendChild(dFrag);
     };
-    ///*设在验证码*/
-    //$http.get('data/verify.json').success(function (data) {
-    //  $scope.location = data;
-    //});
+
+    $scope.setCookie = function(){
+      var user = {};
+      user.userNickName = "towersxu";
+      $cookieStore.put("userinfo",user);
+    }
   }
 ]);
-demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$cookieStore',
-  function ($scope, $http, $cookies ,$cookieStore) {
-    //$scope.token = $cookies.token;
-    //$scope.userinfo = $cookieScope.get('userinfo');
-    //console.log(JSON.parse($scope.userinfo));
-    //$scope.davices = ["chrome", "IE", "firefox"];
-    //if ($scope.token) {
-    //  var url = "/SSOServer/server/getBrowser?callback=JSON_CALLBACK&token=" + $scope.token;
-    //  $http.jsonp(url).success(function (data) {
-    //    $scope.davices = data;
-    //    console.log("获取设备返回的数据：" + data);
-    //  }).error(function (data) {
-    //    console.log("获取数据失败!" + data);
-    //  });
-    //}
-    //$scope.forceLogout = function (browser, index) {
-    //  console.log(arguments);
-    //  $scope.davices.splice(index, 1);
-    //  var url = "/SSOServer/server/logoutBrowser?callback=JSON_CALLBACK&browser=" + browser;
-    //  $http.jsonp(url).success(function (data) {
-    //    $scope.davices = data;
-    //    console.log("获取设备返回的数据：" + data);
-    //  }).error(function (data) {
-    //    console.log("获取数据失败!" + data);
-    //  });
-    //}
+
+demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootScope',
+  function ($scope, $http, $cookies ,$rootScope) {
+    var url;
+    $scope.token = $cookies.token;
+    $scope.userinfo = $rootScope.userinfo;
+    $scope.davices = [];
+    if ($scope.token) {
+      url = $rootScope.coxUrl+"/SSOServer/server/getBrowser?callback=JSON_CALLBACK&uid=" + $scope.userinfo.userId;
+      $http.jsonp(url).success(function (data) {
+        var reg = /(Linux|window).+(Trident|Chrome|firefox|Safari).+###(.+)/;
+        var davice = {};
+        for(var i=0;i<data.length;i++){
+          var aa = data[i].davice.exec(reg);
+          console.log(aa);
+          console.log(data[i].davice);
+        }
+        $scope.davices = data || {};
+      }).error(function (data) {
+
+      });
+    }
+    $scope.forceLogout = function (browser, index) {
+      var domian = browser.source.split("^!@#$&")[0],
+          url = domian +"/makeCommunicate?callback=JSON_CALLBACK?url="+domian;
+      $scope.davices.splice(index, 1);
+      if(domian){
+        $http.jsonp(url).success(function(data){
+          url = $rootScope.coxUrl+"/SSOServer/server/otherlogout?callback=JSON_CALLBACK&browser=" + browser.device+"&token="+data.token;
+          $http.jsonp(url).success(function (data) {
+            $scope.davices = data;
+          }).error(function (data) {
+          });
+        }).error(function(data){
+
+        });
+      }
+    }
   }
 ]);
 ;/**
  * Created by taox on 15-4-27.
  */
-;/**
+var demoDirectives = angular.module('demoDirectives', []);
+demoDirectives.directive('header', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'demo/header.html'
+    //template: '<div>Hi there</div>',
+    //replace: true
+  };
+});
+demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies',
+  function ($rootScope, $scope, $cookieStore, $cookies) {
+    var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
+    typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
+    if ($rootScope.userinfo) {
+      $scope.isHidden = false;
+      $scope.name = $rootScope.userinfo;
+    } else {
+      $scope.isHidden = true;
+    }
+  }
+]);;/**
  * Created by taox on 15-4-27.
  */
 ;/**
