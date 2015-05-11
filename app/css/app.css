@@ -90,3 +90,9 @@
     cursor: pointer;
     margin-bottom: 1em;
 }
+@media (min-width: 1200px){
+    .navbar .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 1170px;
+    }
+
+}

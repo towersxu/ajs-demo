@@ -1,11 +1,9 @@
-/**
- * @fileOverview app.js
- * @author taox
- * @version 0.1
- */
-
 'use strict';
-
+/**
+ * @namespace demoApp
+ * @memberOf angular_module
+ * @see module:
+ */
 angular.module('demoApp', [
   'ngRoute',
   'demoControllers',

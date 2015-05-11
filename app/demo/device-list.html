@@ -1,13 +1,14 @@
 
 <div class="table-responsive">
     <table class="table">
-        <thead><th>系统</th><th>浏览器</th><th>IP地址</th><th>上线时间</th><th>强制下线</th></thead>
+        <thead><th>系统</th><th>浏览器</th><th>IP地址</th><th>上线时间</th><th>上线网址</th><th>强制下线</th></thead>
         <tr ng-repeat="davice in davices">
             <td>{{davice.sys}}</td>
             <td>{{davice.software}}</td>
             <td>{{davice.ip}}</td>
-            <td>{{davice.time}}</td>
-            <td><button  ng-click="forceLogout(davice.source,$index)">下线</button></td>
+            <td>{{davice.loginTime}}</td>
+            <td>{{davice.region}}</td>
+            <td><button  ng-click="forceLogout(davice.agent,davice.token,davice.ip,davice.loginTime,$index)">下线</button></td>
         </tr>
     </table>
 </div>
