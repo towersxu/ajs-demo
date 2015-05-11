@@ -1,5 +1,4 @@
-'use strict';
-
+"use strict";
 /**
  * @namespace demoControllers
  * @memberof angular_module.demoApp
@@ -21,7 +20,7 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$
    * @param {$rootScope} $rootScope 注入全局作用域，用于获获取登陆页面地址。
    * @memberof angular_module.demoApp.demoControllers.HomeCtrl
    */
-  function ($scope, $cookies, $cookieStore, $http, $rootScope) {
+    function ($scope, $cookies, $cookieStore, $http, $rootScope) {
 
     $scope.userinfo = $rootScope.userinfo;
     //使用jsonp获取需要设置script的url地址。
@@ -73,7 +72,7 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
    * @param {$rootScope} $rootScope $rootScope 注入全局作用域，用于获获取登陆页面地址。
    * @memberof angular_module.demoApp.demoControllers.DeviceList
    */
-  function ($scope, $http, $cookies ,$rootScope) {
+    function ($scope, $http, $cookies ,$rootScope) {
     var url;
     $scope.token = $cookies.token;
     $scope.userinfo = $rootScope.userinfo;
@@ -143,5 +142,3 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
     }
   }
 ]);
-
-

@@ -1,4 +1,7 @@
-'use strict';
+/**
+ * Created by taox on 15-4-27.
+ */
+;'use strict';
 /**
  * @namespace demoApp
  * @memberOf angular_module
