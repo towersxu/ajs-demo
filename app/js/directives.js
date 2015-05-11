@@ -12,7 +12,8 @@ demoDirectives.directive('header', function () {
 });
 demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies',
   function ($rootScope, $scope, $cookieStore, $cookies) {
-    $rootScope.coxUrl = "http://192.168.1.36:8080";
+	$rootScope.coxUrl = "http://192.168.1.36:8080";
+
     var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
     typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
     if ($rootScope.userinfo) {

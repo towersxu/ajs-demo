@@ -35,8 +35,7 @@ var demoControllers = angular.module('demoControllers', []);
 
 demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$http','$rootScope',
   function ($scope, $cookies, $cookieStore, $http, $rootScope) {
-    $rootScope.coxUrl = "http://192.168.1.36:8080";
-
+    
     $scope.userinfo = $rootScope.userinfo;
     //使用jsonp获取需要设置script的url地址。
     $scope.token = $cookies.token || $cookieStore.get("token");
@@ -75,35 +74,48 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
     $scope.userinfo = $rootScope.userinfo;
     $scope.davices = [];
     if ($scope.token) {
-      url = $rootScope.coxUrl+"/SSOServer/server/getBrowser?callback=JSON_CALLBACK&uid=" + $scope.userinfo.userId;
-      $http.jsonp(url).success(function (data) {
-        var reg = /(Linux|window).+(Trident|Chrome|firefox|Safari).+###(.+)/;
-        var davice = {};
-        for(var i=0;i<data.length;i++){
-          var aa = data[i].davice.exec(reg);
-          console.log(aa);
-          console.log(data[i].davice);
-        }
-        $scope.davices = data || {};
-      }).error(function (data) {
-
-      });
-    }
-    $scope.forceLogout = function (browser, index) {
-      var domian = browser.source.split("^!@#$&")[0],
-          url = domian +"/makeCommunicate?callback=JSON_CALLBACK?url="+domian;
-      $scope.davices.splice(index, 1);
-      if(domian){
-        $http.jsonp(url).success(function(data){
-          url = $rootScope.coxUrl+"/SSOServer/server/otherlogout?callback=JSON_CALLBACK&browser=" + browser.device+"&token="+data.token;
-          $http.jsonp(url).success(function (data) {
-            $scope.davices = data;
-          }).error(function (data) {
-          });
-        }).error(function(data){
+        url = $rootScope.coxUrl + "/SSOServer/server/getBrowser?callback=JSON_CALLBACK&uid=" + $scope.userinfo.userId;
+        $http.jsonp(url).success(function (data) {
+          var davice,
+            agent,
+            regSys = /windows|linux/,
+            regMobile = /android|iphone/,
+            regBoweser = /ie|chrome|trident/,
+            regSecond = /qq|micromessenger|bidu|uc/,
+            reg = /###(.+)###(.+)/;
+          $scope.davices = [];
+          for (var i = 0; i < data.length; i++) {
+            davice = {};
+            davice.agent = data[i].device;
+            davice.source = data[i].source;
+            agent = davice.agent.toLowerCase();
+            davice.sys = agent.match(regSys);
+            davice.sys ? davice.sys = davice.sys[0] : davice.sys = "unknown";
+            if (agent.match(regMobile)) {
+              davice.sys = agent.match(regMobile)[0];
+            }
+            davice.software = agent.match(regBoweser);
+            davice.software ? davice.software = davice.software[0] : davice.software = "unknown";
+            if (agent.match(regSecond)) {
+              davice.software = agent.match(regSecond)[0];
+            }
+            davice.ip = agent.match(reg)[1] || "unknown";
+            davice.time = agent.match(reg)[2] || "unknown";
+            $scope.davices.push(davice);
+          }
+        }).error(function (data) {
 
         });
       }
+    $scope.forceLogout = function (browser, index) {
+        var newToken = browser.source.split("^!@#$&")[1];
+          //url = domian + "/makeCommunicate?callback=JSON_CALLBACK?url=" + domian;
+        $scope.davices.splice(index, 1);
+        url = $rootScope.coxUrl + "/SSOServer/server/otherlogout?callback=JSON_CALLBACK&browser=" + browser.device + "&token=" + newToken;
+        $http.jsonp(url).success(function (data) {
+          $scope.davices = data;
+        }).error(function (data) {
+        });
     }
   }
 ]);
@@ -121,6 +133,8 @@ demoDirectives.directive('header', function () {
 });
 demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies',
   function ($rootScope, $scope, $cookieStore, $cookies) {
+	$rootScope.coxUrl = "http://192.168.1.36:8080";
+
     var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
     typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
     if ($rootScope.userinfo) {
