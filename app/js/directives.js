@@ -9,12 +9,11 @@ var demoDirectives = angular.module('demoDirectives', []);
  * @desc 自定义angular指令<header>
  * @example <caption>Example usage of header.</caption>
  * // html
- *&lt;header class="nav"&gt;&lt;/header&gt;
+ *&lt;div header class="nav" ng-controller="NavDirectiveCtrl" &gt;&lt;/div&gt;
  * @memberof angular_module.demoApp.demoDirectives
  */
 demoDirectives.directive('header', function () {
   return {
-    restrict: 'E',
     templateUrl: 'demo/header.html'
   };
 });
