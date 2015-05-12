@@ -1,12 +1,9 @@
 /**
- * Created by taox on 15-4-27.
- */
-;'use strict';
-/**
  * @namespace demoApp
  * @memberOf angular_module
  * @see module:
  */
+'use strict';
 angular.module('demoApp', [
   'ngRoute',
   'demoControllers',
