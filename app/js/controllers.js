@@ -142,4 +142,3 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
     }
   }
 ]);
-
