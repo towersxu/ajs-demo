@@ -22,7 +22,6 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$
    * @memberof angular_module.demoApp.demoControllers.HomeCtrl
    */
   function ($scope, $cookies, $cookieStore, $http, $rootScope) {
-
     $scope.userinfo = $rootScope.userinfo;
     //使用jsonp获取需要设置script的url地址。
     $scope.token = $cookies.token || $cookieStore.get("token");
@@ -143,5 +142,4 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
     }
   }
 ]);
-
 

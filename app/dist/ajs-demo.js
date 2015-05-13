@@ -17,11 +17,17 @@ angular.module('demoApp', [
     $routeProvider.when('/home',{
       templateUrl:'demo/home.html',
       controller:'HomeCtrl'
+<<<<<<< HEAD
     }).when('/DeviceList',{
       templateUrl:'demo/device-list.html',
       controller:'DeviceList'
+=======
+    }).when('/login',{
+      templateUrl:'demo/login.html',
+      controller:'LoginCtrl'
+>>>>>>> loginView
     }).otherwise({
-      redirectTo:'/home'
+      redirectTo:'/login'
     });
   }
 ]);;'use strict';
@@ -49,6 +55,7 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$
    */
   function ($scope, $cookies, $cookieStore, $http, $rootScope) {
 
+<<<<<<< HEAD
     $scope.userinfo = $rootScope.userinfo;
     //使用jsonp获取需要设置script的url地址。
     $scope.token = $cookies.token || $cookieStore.get("token");
@@ -134,6 +141,23 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
         davice.ip = data[i].ip;
         davice.loginTime = data[i].logintime;
         davice.region = data[i].region;
+=======
+demoControllers.controller('NavCtrl', [function(){}]);
+
+demoControllers.controller('HomeCtrl', [function(){}]);
+
+demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$cookies', '$location',
+  function ($scope, $http, $cookieStore, $cookies, $location) {
+    /*设置登陆提示信息*/
+    $scope.tipInfoObject = {
+      "N": "",
+      "UE": "帐号或者密码不正确！",
+      "VE": "验证码错误！",
+      "NE": "网络出错！"
+    };
+    $scope.tipInfo = $scope.tipInfoObject[$cookies.errorType];
+    $scope.domain = $location.search().origUrl || $location.host();
+>>>>>>> loginView
 
         agent = davice.agent.toLowerCase();
         davice.sys = agent.match(regSys);
@@ -149,6 +173,7 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
         $scope.davices.push(davice);
       }
     };
+<<<<<<< HEAD
     /**
      * @function $scope.forceLogout
      * @desc 强制下线某个登陆角色
@@ -171,6 +196,15 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
 ]);
 
 
+=======
+    ///*获取验证码*/
+    //$http.get('data/verify.json').success(function (data) {
+    //  $scope.location = data;
+    //});
+  }
+]);
+
+>>>>>>> loginView
 ;/**
  * @namespace demoDirectives
  * @desc 顶部导航条模板
