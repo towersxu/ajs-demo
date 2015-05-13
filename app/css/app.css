@@ -1,13 +1,17 @@
-.user_login{
+#loginForm{
+	padding:2em;
+	border:1px solid #cecece;
+}
+#loginForm .user_login{
     border: 1px solid silver;
     padding: 0 2em;
     margin-top:3em ;
     color: #747474;
 }
-.user_login h3{
+#loginForm .user_login h3{
     font-size: 1.25em;
 }
-.user_name{
+#loginForm .user_name{
     display: block;
     border: 2px solid #e1e1e1;
     text-indent:2em;
@@ -16,7 +20,7 @@
     padding: .5em 0;
     margin-bottom: 1.5em;
 }
-.login{
+#login_button{
     display: block;
     background-color: #d23f3a;
     width: 100%;
@@ -27,72 +31,72 @@
     font-size: 1.5em;
     text-align:center;
 }
-.line{
+#loginForm .line{
     background: #eee;
     height: 1px;
     margin-top: 40px;
 }
-.key{
+#loginForm  .key{
     background: url('../img/login-key-icon.png') no-repeat 15px center;
 }
-.lock{
+#loginForm  .lock{
     background: url('../img/login-locked-icon.png') no-repeat 15px center;
 }
-.sina{
+#loginForm .sina{
     background: url('../img/bg.png') no-repeat -10px -27px;
     width: 32px;
     height: 32px;
     display: inline-block;
 }
-.in{
+#loginForm .in{
     background: url('img/bg.png') no-repeat -47px -27px;
     width: 32px;
     height: 32px;
 }
-.baidu{
+#loginForm .baidu{
     background: url('img/bg.png') no-repeat -84px -27px;
     width: 32px;
     height: 32px;
 }
-.qq{
+#loginForm .qq{
     background: url('../img/bg.png') no-repeat -122px -27px;
     width: 32px;
     height: 32px;
     display: inline-block;
 }
-.google{
+#loginForm .google{
     background: url('img/bg.png') no-repeat -159px -27px;
     width: 32px;
     height: 32px;
 }
-.git{
+#loginForm .git{
     background: url('img/bg.png') no-repeat -196px -27px;
     width: 32px;
     height: 32px;
 }
-.third-part span{
+#loginForm .third-part span{
     display: block;
     margin-bottom: 0.5em;
 }
-.register{
+#loginForm .register{
     margin: 1em 0 2em 0;
 }
-.user_login .error{
+#loginForm .user_login .error{
     border: 1px solid #fedddc !important;
 }
-.tipInfo{
+#loginForm .tipInfo{
     font-weight: lighter;
     color: red;
 }
-.verifyUrl{
-    display: block;
-    font-size: 0.5em;
+#loginForm .verifyUrl{
+    display: inline-block;
+    line-height:2em;
+    font-size: 1em;
     cursor: pointer;
-    margin-bottom: 1em;
+    margin:0 0 1em 1em;
 }
-@media (min-width: 1200px){
-    .navbar .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-        width: 1170px;
-    }
-
+#loginForm .verify-img {
+	vertical-align:middle;
+	display:inline-block;
+	margin: 0 0 0 1em;
 }
