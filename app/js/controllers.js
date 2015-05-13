@@ -126,8 +126,8 @@ demoControllers.controller('DeviceList', ['$scope', '$http', '$cookies','$rootSc
      * @function $scope.forceLogout
      * @desc 强制下线某个登陆角色
      * @param {String} agent 登陆浏览器请求头
-     * @param {String} token 登陆验证令牌
-     * @param {String} ip 登陆地址
+     * @param {String} token 登陆验证令牌三
+     * @param {String} ip 登陆地址服务器
      * @param {String} loginTime 登陆时间
      * @param {int} index 在所有登陆信息中的位置
      * @memberof angular_module.demoApp.demoControllers.DeviceList
