@@ -8,6 +8,7 @@ angular.module('demoApp', [
   'ngRoute',
   'demoControllers',
   'demoDirectives',
+  'karamControllers',
   'ngCookies'
 ]).config(['$routeProvider',
   function ($routeProvider) {
@@ -17,6 +18,9 @@ angular.module('demoApp', [
     }).when('/DeviceList',{
       templateUrl:'demo/device-list.html',
       controller:'DeviceList'
+    }).when('/Http-test',{
+      templateUrl:'demo/http-test.html',
+      controller:'HttpCtrl'
     }).otherwise({
       redirectTo:'/home'
     });

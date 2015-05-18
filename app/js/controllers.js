@@ -23,6 +23,7 @@ demoControllers.controller('HomeCtrl', ['$scope', '$cookies', '$cookieStore', '$
    */
   function ($scope, $cookies, $cookieStore, $http, $rootScope) {
     $scope.userinfo = $rootScope.userinfo;
+    $scope.karamValue = true;
     //使用jsonp获取需要设置script的url地址。
     $scope.token = $cookies.token || $cookieStore.get("token");
     if ($scope.token) {
