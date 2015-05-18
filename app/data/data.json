@@ -1,0 +1,18 @@
+{
+  "name":"taox",
+  "age":"24",
+  "friends":[
+    {
+      "name":"xt",
+      "age":"24"
+    },
+    {
+      "name":"resole",
+      "age":23
+    },
+    {
+      "name":"towersxu",
+      "age":"25"
+    }
+  ]
+}
