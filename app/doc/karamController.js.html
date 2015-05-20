@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: header</title>
+    <title>JSDoc: Source: karamController.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,99 +17,38 @@
 
 <div id="main">
     
-    <h1 class="page-title">Namespace: header</h1>
+    <h1 class="page-title">Source: karamController.js</h1>
     
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * Created by taox on 15-5-18.
+ */
+var karamControllers = angular.module('karamControllers', ['ngResource']);
 
-<section>
-    
-<header>
-    <h2>
-        <span class="ancestors"><a href="angular_module.demoApp.html">.demoApp</a><a href="angular_module.demoApp.demoDirectives.html">.demoDirectives</a>.</span>
-    
-    header
-    </h2>
-    
-</header>  
+karamControllers.factory('jsonData',['$resource',
+  function($resource){
+    return $resource('data/:url',{},{
+      query: {method:'GET', params:{url:'urls'}, isArray:true}
+    });
+  }
+]);
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-            <div class="description">自定义angular指令<header></div>
-        
-        
-        
-<dl class="details">
-    
-        
-    
-    
-    
+karamControllers.controller('HttpCtrl',['$scope','jsonData',
+  function($scope,jsonData){
+    $scope.data = jsonData.get({url:"data.json"},function(data){
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="directives.js.html">directives.js</a>, <a href="directives.js.html#line7">line 7</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-        
-        
-            <h3>Example</h3>
-            
-        <p class="code-caption">Example usage of header.</p>
-    
-    <pre class="prettyprint"><code>// html
-&lt;div header class="nav" ng-controller="NavDirectiveCtrl" &gt;&lt;/div&gt;</code></pre>
-
-        
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</article>
-
-</section>  
+    });
+    console.log($scope.data)
+  }
+]);
+</code></pre>
+        </article>
+    </section>
 
 
 
