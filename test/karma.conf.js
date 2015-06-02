@@ -13,7 +13,7 @@ module.exports = function(config){
       'test/unit/**/*.js'
     ],
 
-    autoWatch : true,
+    autoWatch : false,
 
     frameworks: ['jasmine'],
 
@@ -21,13 +21,21 @@ module.exports = function(config){
 
     plugins : [
             'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-jasmine'
+            'karma-jasmine',
+            'karma-junit-reporter',
+            'karma-coverage'
             ],
-
+    reporters:['progress','junit','coverage'],
+    preprocessors:{
+      'app/js/*.js':['coverage']
+    },
     junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
+      outputFile: 'test/unit/karma.xml',
+      suite: ''
+    },
+    coverageReporter:{
+      type:"cobertura",
+      dir:'coverage/'
     }
 
   });
