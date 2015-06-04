@@ -15,18 +15,18 @@ module.exports = function(config){
 
     autoWatch : true,
 
-    singleRun:true,
     frameworks: ['jasmine'],
-    browsers:['PhantomJS','Chrome'],
+
+    browsers : ['Chrome','Firefox'],
 
     plugins : [
-      'karma-phantomjs-launcher',
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
       'karma-jasmine',
       'karma-junit-reporter',
       'karma-coverage'
     ],
-    reporters:['dots','junit','coverage'],
+    reporters:['progress','junit','coverage'],
     preprocessors:{
       'app/js/*.js':['coverage']
     },

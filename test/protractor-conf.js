@@ -1,4 +1,6 @@
 exports.config = {
+  framework: 'jasmine2',
+
   allScriptsTimeout: 11000,
 
   specs: [
@@ -12,9 +14,12 @@ exports.config = {
   chromeOnly: true,
 
   baseUrl: 'http://localhost:8000/',
-
-  framework: 'jasmine',
-
+  onPrepare:function(){
+    var jasmineReporters = require('jasmine-reporters');
+    jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+      savePath:"test/e2e/"
+    }));
+  },
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000
   }
