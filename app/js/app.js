@@ -16,6 +16,9 @@ angular.module('demoApp', [
     $routeProvider.when('/login',{
       templateUrl:'demo/login.html',
       controller:'LoginCtrl'
+    }).when('/register',{
+      templateUrl:"demo/register.html",
+      controller:"RegisterCtrl"
     }).otherwise({
       redirectTo:'/login'
     });

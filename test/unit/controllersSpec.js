@@ -20,3 +20,16 @@ describe('ajsDemo controllers', function () {
 });
 
 
+describe('login controllers',function(){
+  describe('RegisterCtrl',function() {
+    var scope,ctrl;
+    beforeEach(module('demoApp'));
+    beforeEach(inject(function($scope,$controller){
+      scope = $scope;
+      ctrl = $controller('RegisterCtrl',{$scope:scope})
+    }));
+    it('Email default is vaild.',function(){
+      expect(scope.isEmailVailed).toEqual(true);
+    })
+  });
+});

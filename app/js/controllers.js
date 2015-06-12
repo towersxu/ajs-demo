@@ -34,4 +34,26 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$co
     };
   }
 ]);
+demoControllers.controller('RegisterCtrl',['$scope','$http',
+  function($scope,$http){
+    $scope.isEmailVailed = true;
+
+    $scope.blurEmail = function(){
+      if($scope.email){
+        $http.post('/someUrl', {registerEmail:$scope.email}).
+          success(function(data, status, headers, config) {
+            $scope.isEmailVailed = true;
+            $scope.emailErrorResult = "(exist)";
+          }).
+          error(function(data, status, headers, config) {
+            $scope.isEmailVailed = false;
+            $scope.emailErrorResult = "(exist)";
+          });
+      }else{
+        $scope.isEmailVailed = false;
+        $scope.emailErrorResult = "(invalid)";
+      }
+    }
+  }
+]);
 

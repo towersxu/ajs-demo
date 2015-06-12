@@ -19,6 +19,9 @@ angular.module('demoApp', [
     $routeProvider.when('/login',{
       templateUrl:'demo/login.html',
       controller:'LoginCtrl'
+    }).when('/register',{
+      templateUrl:"demo/register.html",
+      controller:"RegisterCtrl"
     }).otherwise({
       redirectTo:'/login'
     });
@@ -59,8 +62,13 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$co
     };
   }
 ]);
+demoControllers.controller('RegisterCtrl',['$scope',
+  function($scope){
 
-;/**
+  }
+]);
+
+/**
  * @namespace demoDirectives
  * @desc 顶部导航条模板
  * @memberof angular_module.demoApp
@@ -109,5 +117,14 @@ demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieS
  * Created by taox on 15-4-27.
  */
 ;/**
+ * Created by taox on 15-6-12.
+ */
+angular.module('loginDirectives', []).directive('register',function(){
+  return {
+    replace:true,
+    restrict:'E',
+    templateUrl: 'demo/register.html'
+  };
+});;/**
  * Created by taox on 15-4-27.
  */

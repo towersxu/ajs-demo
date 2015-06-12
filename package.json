@@ -1,6 +1,5 @@
 {
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
   "name": "ajs-demo",
   "description": "A demo application for AngularJS",
   "repository": "https://github.com/towersxu/ajs-demo",
