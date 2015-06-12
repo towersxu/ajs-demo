@@ -1,0 +1,129 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/taox/node-v0.12.2-linux-x64/bin/node',
+1 verbose cli   '/home/taox/node-v0.12.2-linux-x64/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 verbose install where, deps [ '/home/taox/workspace/ajs-demo',
+4 verbose install   [ 'bower',
+4 verbose install     'grunt',
+4 verbose install     'grunt-bower-task',
+4 verbose install     'grunt-contrib-concat',
+4 verbose install     'grunt-contrib-uglify',
+4 verbose install     'grunt-jsdoc',
+4 verbose install     'http-server',
+4 verbose install     'jasmine-reporters',
+4 verbose install     'karma',
+4 verbose install     'karma-chrome-launcher',
+4 verbose install     'karma-coverage',
+4 verbose install     'karma-firefox-launcher',
+4 verbose install     'karma-jasmine',
+4 verbose install     'karma-junit-reporter',
+4 verbose install     'karma-phantomjs-launcher',
+4 verbose install     'shelljs',
+4 verbose install     'tmp' ] ]
+5 verbose install where, peers [ '/home/taox/workspace/ajs-demo', [] ]
+6 info preinstall ajs-demo@0.0.1
+7 verbose already installed skipping jasmine-reporters@^2.0.6 /home/taox/workspace/ajs-demo
+8 verbose already installed skipping karma@^0.12.35 /home/taox/workspace/ajs-demo
+9 verbose already installed skipping karma-chrome-launcher@^0.1.4 /home/taox/workspace/ajs-demo
+10 verbose already installed skipping karma-coverage@0.3.x /home/taox/workspace/ajs-demo
+11 verbose already installed skipping karma-firefox-launcher@^0.1.6 /home/taox/workspace/ajs-demo
+12 verbose already installed skipping karma-jasmine@^0.1.5 /home/taox/workspace/ajs-demo
+13 verbose already installed skipping karma-junit-reporter@0.2.x /home/taox/workspace/ajs-demo
+14 verbose already installed skipping karma-phantomjs-launcher@0.2.0 /home/taox/workspace/ajs-demo
+15 verbose already installed skipping shelljs@^0.2.6 /home/taox/workspace/ajs-demo
+16 verbose already installed skipping tmp@0.0.23 /home/taox/workspace/ajs-demo
+17 verbose already installed skipping bower@^1.3.1 /home/taox/workspace/ajs-demo
+18 verbose already installed skipping grunt@~0.4.5 /home/taox/workspace/ajs-demo
+19 verbose already installed skipping grunt-bower-task@~0.4.0 /home/taox/workspace/ajs-demo
+20 verbose already installed skipping grunt-contrib-concat@0.5.1 /home/taox/workspace/ajs-demo
+21 verbose already installed skipping grunt-contrib-uglify@0.9.1 /home/taox/workspace/ajs-demo
+22 verbose already installed skipping grunt-jsdoc@0.5.8 /home/taox/workspace/ajs-demo
+23 verbose already installed skipping http-server@^0.6.1 /home/taox/workspace/ajs-demo
+24 silly install resolved []
+25 info build /home/taox/workspace/ajs-demo
+26 verbose linkStuff [ false, false, false, '/home/taox/workspace' ]
+27 info linkStuff ajs-demo@0.0.1
+28 verbose linkBins ajs-demo@0.0.1
+29 verbose linkMans ajs-demo@0.0.1
+30 verbose rebuildBundles ajs-demo@0.0.1
+31 verbose rebuildBundles [ '.bin',
+31 verbose rebuildBundles   'bower',
+31 verbose rebuildBundles   'grunt',
+31 verbose rebuildBundles   'grunt-bower-task',
+31 verbose rebuildBundles   'grunt-contrib-concat',
+31 verbose rebuildBundles   'grunt-contrib-uglify',
+31 verbose rebuildBundles   'grunt-jsdoc',
+31 verbose rebuildBundles   'http-server',
+31 verbose rebuildBundles   'jasmine-reporters',
+31 verbose rebuildBundles   'karma',
+31 verbose rebuildBundles   'karma-chrome-launcher',
+31 verbose rebuildBundles   'karma-coverage',
+31 verbose rebuildBundles   'karma-firefox-launcher',
+31 verbose rebuildBundles   'karma-jasmine',
+31 verbose rebuildBundles   'karma-junit-reporter',
+31 verbose rebuildBundles   'karma-phantomjs-launcher',
+31 verbose rebuildBundles   'phantomjs',
+31 verbose rebuildBundles   'shelljs',
+31 verbose rebuildBundles   'tmp' ]
+32 verbose rebuild bundle /home/taox/workspace/ajs-demo/node_modules/phantomjs
+33 info build /home/taox/workspace/ajs-demo/node_modules/phantomjs
+34 info preinstall phantomjs@1.9.17
+35 verbose linkStuff [ false,
+35 verbose linkStuff   false,
+35 verbose linkStuff   false,
+35 verbose linkStuff   '/home/taox/workspace/ajs-demo/node_modules' ]
+36 info linkStuff phantomjs@1.9.17
+37 verbose linkBins phantomjs@1.9.17
+38 verbose link bins [ { phantomjs: './bin/phantomjs' },
+38 verbose link bins   '/home/taox/workspace/ajs-demo/node_modules/.bin',
+38 verbose link bins   false ]
+39 verbose linkMans phantomjs@1.9.17
+40 verbose rebuildBundles phantomjs@1.9.17
+41 verbose rebuildBundles [ '.bin',
+41 verbose rebuildBundles   'adm-zip',
+41 verbose rebuildBundles   'fs-extra',
+41 verbose rebuildBundles   'kew',
+41 verbose rebuildBundles   'npmconf',
+41 verbose rebuildBundles   'progress',
+41 verbose rebuildBundles   'request',
+41 verbose rebuildBundles   'request-progress',
+41 verbose rebuildBundles   'which' ]
+42 silly gentlyRm /home/taox/workspace/ajs-demo/node_modules/.bin/phantomjs is being purged
+43 verbose gentlyRm don't care about contents; nuking /home/taox/workspace/ajs-demo/node_modules/.bin/phantomjs
+44 silly vacuum-fs purging /home/taox/workspace/ajs-demo/node_modules/.bin/phantomjs
+45 silly vacuum-fs quitting because other entries in /home/taox/workspace/ajs-demo/node_modules/.bin
+46 info install phantomjs@1.9.17
+47 verbose unsafe-perm in lifecycle true
+48 info postinstall phantomjs@1.9.17
+49 info install ajs-demo@0.0.1
+50 info postinstall ajs-demo@0.0.1
+51 verbose unsafe-perm in lifecycle true
+52 info ajs-demo@0.0.1 Failed to exec postinstall script
+53 verbose stack Error: ajs-demo@0.0.1 postinstall: `bower install`
+53 verbose stack Exit status 1
+53 verbose stack     at EventEmitter.<anonymous> (/home/taox/node-v0.12.2-linux-x64/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+53 verbose stack     at EventEmitter.emit (events.js:110:17)
+53 verbose stack     at ChildProcess.<anonymous> (/home/taox/node-v0.12.2-linux-x64/lib/node_modules/npm/lib/utils/spawn.js:14:12)
+53 verbose stack     at ChildProcess.emit (events.js:110:17)
+53 verbose stack     at maybeClose (child_process.js:1015:16)
+53 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+54 verbose pkgid ajs-demo@0.0.1
+55 verbose cwd /home/taox/workspace/ajs-demo
+56 error Linux 3.19.5-200.fc21.x86_64
+57 error argv "/home/taox/node-v0.12.2-linux-x64/bin/node" "/home/taox/node-v0.12.2-linux-x64/bin/npm" "install"
+58 error node v0.12.2
+59 error npm  v2.7.4
+60 error code ELIFECYCLE
+61 error ajs-demo@0.0.1 postinstall: `bower install`
+61 error Exit status 1
+62 error Failed at the ajs-demo@0.0.1 postinstall script 'bower install'.
+62 error This is most likely a problem with the ajs-demo package,
+62 error not with npm itself.
+62 error Tell the author that this fails on your system:
+62 error     bower install
+62 error You can get their info via:
+62 error     npm owner ls ajs-demo
+62 error There is likely additional logging output above.
+63 verbose exit [ 1, true ]

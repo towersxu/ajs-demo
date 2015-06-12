@@ -35,8 +35,8 @@ demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieS
 
     var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
     typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
-    $scope.isHidden = true;
-    if ($rootScope.userinfo) {
+    $scope.isHidden = false;
+    if ($rootScope.userinfo && $rootScope.userinfo.name) {
       $scope.isHidden = false;
       $scope.name = $rootScope.userinfo;
     } else {
