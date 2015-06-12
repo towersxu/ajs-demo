@@ -14,7 +14,7 @@ describe('ajsDemo controllers', function () {
       ctrl = $controller('LoginCtrl',{$scope:scope,$cookieStore:$cookieStore});
     }));
     it('should show',function(){
-      expect(scope.isSavePw).toEqual(true);
+      expect(scope.isSavePw).toEqual(false);
     })
   });
 });
@@ -24,8 +24,8 @@ describe('login controllers',function(){
   describe('RegisterCtrl',function() {
     var scope,ctrl;
     beforeEach(module('demoApp'));
-    beforeEach(inject(function($scope,$controller){
-      scope = $scope;
+    beforeEach(inject(function($rootScope,$controller){
+      scope = $rootScope.$new();
       ctrl = $controller('RegisterCtrl',{$scope:scope})
     }));
     it('Email default is vaild.',function(){
