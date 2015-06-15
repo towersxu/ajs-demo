@@ -62,13 +62,30 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$co
     };
   }
 ]);
-demoControllers.controller('RegisterCtrl',['$scope',
-  function($scope){
+demoControllers.controller('RegisterCtrl',['$scope','$http',
+  function($scope,$http){
+    $scope.isEmailVailed = true;
 
+    $scope.blurEmail = function(){
+      if($scope.email){
+        $http.post('/someUrl', {registerEmail:$scope.email}).
+          success(function(data, status, headers, config) {
+            $scope.isEmailVailed = true;
+            $scope.emailErrorResult = "(exist)";
+          }).
+          error(function(data, status, headers, config) {
+            $scope.isEmailVailed = false;
+            $scope.emailErrorResult = "(exist)";
+          });
+      }else{
+        $scope.isEmailVailed = false;
+        $scope.emailErrorResult = "(invalid)";
+      }
+    }
   }
 ]);
 
-/**
+;/**
  * @namespace demoDirectives
  * @desc 顶部导航条模板
  * @memberof angular_module.demoApp
@@ -84,7 +101,11 @@ var demoDirectives = angular.module('demoDirectives', []);
  */
 demoDirectives.directive('header', function () {
   return {
-    templateUrl: 'demo/header.html'
+    restrict:'A',
+    templateUrl: 'demo/header.html',
+    link:function(scope,el,attrs){
+      console.log(arguments);
+    }
   };
 });
 /**
@@ -117,14 +138,5 @@ demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieS
  * Created by taox on 15-4-27.
  */
 ;/**
- * Created by taox on 15-6-12.
- */
-angular.module('loginDirectives', []).directive('register',function(){
-  return {
-    replace:true,
-    restrict:'E',
-    templateUrl: 'demo/register.html'
-  };
-});;/**
  * Created by taox on 15-4-27.
  */

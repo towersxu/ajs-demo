@@ -14,7 +14,11 @@ var demoDirectives = angular.module('demoDirectives', []);
  */
 demoDirectives.directive('header', function () {
   return {
-    templateUrl: 'demo/header.html'
+    restrict:'A',
+    templateUrl: 'demo/header.html',
+    link:function(scope,el,attrs){
+      console.log(arguments);
+    }
   };
 });
 /**
