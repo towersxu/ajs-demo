@@ -65,21 +65,54 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$co
 demoControllers.controller('RegisterCtrl',['$scope','$http',
   function($scope,$http){
     $scope.isEmailVailed = true;
+    $scope.isPasswordVailed = true;
+    $scope.isPassword1Vailed = true;
 
     $scope.blurEmail = function(){
       if($scope.email){
-        $http.post('/someUrl', {registerEmail:$scope.email}).
+        $http.post('SSOServer/server/validateemail', {userEmail:$scope.email}).
           success(function(data, status, headers, config) {
-            $scope.isEmailVailed = true;
-            $scope.emailErrorResult = "(exist)";
+            if(data && (data.status == "pass")){
+              $scope.isEmailVailed = true;
+              $scope.emailErrorResult = "";
+            }else{
+              $scope.isEmailVailed = false;
+              $scope.emailErrorResult = "(exist)";
+            }
           }).
           error(function(data, status, headers, config) {
             $scope.isEmailVailed = false;
-            $scope.emailErrorResult = "(exist)";
+            $scope.emailErrorResult = "(server error)";
           });
       }else{
         $scope.isEmailVailed = false;
         $scope.emailErrorResult = "(invalid)";
+      }
+    };
+    $scope.keyupPassword = function(){
+      if($scope.password && $scope.password.length>6 && $scope.password.length<32){
+        $scope.isPasswordVailed = true;
+        $scope.passwordErrorInfo = "";
+      }else{
+        $scope.isPasswordVailed = false;
+        $scope.passwordErrorInfo = "(password length should between 6-32)";
+      }
+    };
+    $scope.keyupPassword1 = function(){
+      if($scope.password && ($scope.password1==$scope.password)){
+        $scope.isPassword1Vailed = true;
+        $scope.password1ErrorInfo = "";
+      }else{
+        $scope.isPassword1Vailed = false;
+        $scope.password1ErrorInfo = "(retype password not equal password)";
+      }
+    };
+
+    $scope.registerHandle = function(){
+      if($scope.isEmailVailed && $scope.isPasswordVailed && $scope.isPassword1Vailed){
+
+      }else{
+        return false;
       }
     }
   }
