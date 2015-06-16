@@ -42,7 +42,7 @@ demoControllers.controller('RegisterCtrl',['$scope','$http',
 
     $scope.blurEmail = function(){
       if($scope.email){
-        $http.post('SSOServer/server/validateemail', {userEmail:$scope.email}).
+        $http.post('/SSOServer/server/validateemail', {userEmail:$scope.email}).
           success(function(data, status, headers, config) {
             if(data && (data.status == "pass")){
               $scope.isEmailVailed = true;
