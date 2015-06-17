@@ -39,33 +39,39 @@ demoControllers.controller('RegisterCtrl',['$scope','$http',
     $scope.isEmailVailed = true;
     $scope.isPasswordVailed = true;
     $scope.isPassword1Vailed = true;
-
+    $scope.isInValid = true;
     $scope.blurEmail = function(){
       if($scope.email){
         $http.post('/SSOServer/server/validateemail', {userEmail:$scope.email}).
           success(function(data, status, headers, config) {
             if(data && (data.status == "pass")){
+              $scope.registerForm.$invalid = false;
               $scope.isEmailVailed = true;
               $scope.emailErrorResult = "";
             }else{
+              $scope.registerForm.$invalid = true;
               $scope.isEmailVailed = false;
               $scope.emailErrorResult = "(exist)";
             }
           }).
           error(function(data, status, headers, config) {
+            $scope.registerForm.$invalid = true;
             $scope.isEmailVailed = false;
             $scope.emailErrorResult = "(server error)";
           });
       }else{
         $scope.isEmailVailed = false;
-        $scope.emailErrorResult = "(invalid)";
+        $scope.registerForm.$invalid = true;
+        $scope.emailErrorResult = "(empty)";
       }
     };
     $scope.keyupPassword = function(){
       if($scope.password && $scope.password.length>6 && $scope.password.length<32){
-        $scope.isPasswordVailed = true;
         $scope.passwordErrorInfo = "";
+        $scope.isPasswordVailed = true;
+        $scope.registerForm.$invalid = false;
       }else{
+        $scope.registerForm.$invalid = true;
         $scope.isPasswordVailed = false;
         $scope.passwordErrorInfo = "(password length should between 6-32)";
       }
@@ -74,17 +80,19 @@ demoControllers.controller('RegisterCtrl',['$scope','$http',
       if($scope.password && ($scope.password1==$scope.password)){
         $scope.isPassword1Vailed = true;
         $scope.password1ErrorInfo = "";
+        $scope.registerForm.$invalid = false;
       }else{
         $scope.isPassword1Vailed = false;
         $scope.password1ErrorInfo = "(retype password not equal password)";
+        $scope.registerForm.$invalid = true;
       }
     };
 
     $scope.registerHandle = function(){
       if($scope.isEmailVailed && $scope.isPasswordVailed && $scope.isPassword1Vailed){
-
+        $scope.isInValid = false;
       }else{
-        return false;
+        $scope.isInValid = true;
       }
     }
   }
