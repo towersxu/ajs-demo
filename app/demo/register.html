@@ -1,8 +1,8 @@
 <div>
-    <form name="registerForm" ng-submit="registerHandle()" method="post" action="/SSOServer/server/reg?url={{domain|trust}}">
+    <form name="registerForm" ng-submit="registerHandle()" method="post" action="{{postUrl}}">
     <div class="form-group" ng-class="{true:'', false:'has-error'}[isEmailVailed]">
         <label for="exampleInputEmail1" class="control-label">Email address {{emailErrorResult}}</label>
-        <input type="email" name="userName" class="form-control" id="exampleInputEmail1" placeholder="Enter email"  ng-model="email" ng-blur="blurEmail()" required>
+        <input type="email" name="userName" class="form-control" id="exampleInputEmail1" placeholder="Enter email"  ng-model="email" ng-keyup="keyupEmail()" required>
     </div>
     <div class="form-group" ng-class="{true:'', false:'has-error'}[isPasswordVailed]">
         <label for="exampleInputPassword1" class="control-label">Password{{passwordErrorInfo}}</label>

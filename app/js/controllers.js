@@ -41,52 +41,58 @@ demoControllers.controller('RegisterCtrl',['$scope','$http','$location',
     $scope.isPasswordVailed = true;
     $scope.isPassword1Vailed = true;
     $scope.isInValid = true;
-    $scope.blurEmail = function(){
+
+    function getFormValidStatus(){
+      if($scope.isEmailVailed && $scope.isPasswordVailed && $scope.isPassword1Vailed && $scope.password && $scope.password1 && $scope.email){
+        $scope.registerForm.$invalid = false;
+      }else{
+        $scope.registerForm.$invalid = true;
+      }
+    }
+    $scope.postUrl = '/SSOServer/server/reg?url="'+($location.search().origUrl || $location.host())+'"';
+    $scope.keyupEmail = function(){
       if($scope.email){
         $http.post('/SSOServer/server/validateemail', {userEmail:$scope.email}).
           success(function(data, status, headers, config) {
             if(data && (data.status == "pass")){
-              $scope.registerForm.$invalid = false;
               $scope.isEmailVailed = true;
               $scope.emailErrorResult = "";
             }else{
-              $scope.registerForm.$invalid = true;
               $scope.isEmailVailed = false;
               $scope.emailErrorResult = "(exist)";
             }
+
           }).
           error(function(data, status, headers, config) {
-            $scope.registerForm.$invalid = true;
             $scope.isEmailVailed = false;
             $scope.emailErrorResult = "(server error)";
           });
       }else{
         $scope.isEmailVailed = false;
-        $scope.registerForm.$invalid = true;
-        $scope.emailErrorResult = "(empty)";
+        $scope.emailErrorResult = "(email invalid)";
       }
+      getFormValidStatus();
     };
     $scope.keyupPassword = function(){
       if($scope.password && $scope.password.length>6 && $scope.password.length<32){
         $scope.passwordErrorInfo = "";
         $scope.isPasswordVailed = true;
-        $scope.registerForm.$invalid = false;
       }else{
-        $scope.registerForm.$invalid = true;
         $scope.isPasswordVailed = false;
         $scope.passwordErrorInfo = "(password length should between 6-32)";
       }
+      $scope.keyupPassword1();
+      getFormValidStatus();
     };
     $scope.keyupPassword1 = function(){
       if($scope.password && ($scope.password1==$scope.password)){
         $scope.isPassword1Vailed = true;
         $scope.password1ErrorInfo = "";
-        $scope.registerForm.$invalid = false;
       }else{
         $scope.isPassword1Vailed = false;
         $scope.password1ErrorInfo = "(retype password not equal password)";
-        $scope.registerForm.$invalid = true;
       }
+      getFormValidStatus();
     };
 
     $scope.registerHandle = function(){
@@ -99,3 +105,8 @@ demoControllers.controller('RegisterCtrl',['$scope','$http','$location',
   }
 ]);
 
+demoControllers.filter('trusted',['$sce',function($sce){
+  return function(url) {
+    return $sce.trustAsResourceUrl(url);
+  }
+}]);
