@@ -34,8 +34,9 @@ demoControllers.controller('LoginCtrl', ['$scope', '$http', '$cookieStore', '$co
     };
   }
 ]);
-demoControllers.controller('RegisterCtrl',['$scope','$http',
-  function($scope,$http){
+demoControllers.controller('RegisterCtrl',['$scope','$http','$location',
+  function($scope,$http,$location){
+    $scope.domain = $location.search().origUrl || $location.host();
     $scope.isEmailVailed = true;
     $scope.isPasswordVailed = true;
     $scope.isPassword1Vailed = true;
