@@ -25,7 +25,7 @@ demoDirectives.directive('header', function () {
  * @namespace NavDirectiveCtrl
  * @memberof angular_module.demoApp.demoDirectives
  */
-demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies',
+demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieStore', '$cookies','$location',
   /**
    * @function NavDirectiveCtrlInjectConstruct
    * @param {$rootScope} $rootScope 注入全局作用域，用于设置登陆页面地址
@@ -34,9 +34,9 @@ demoDirectives.controller('NavDirectiveCtrl', ['$rootScope', '$scope', '$cookieS
    * @param {$cookies} $cookies 注入$cookie,用于备份获取cookie
    * @memberof angular_module.demoApp.demoDirectives.NavDirectiveCtrl
    */
-  function ($rootScope, $scope, $cookieStore, $cookies) {
+  function ($rootScope, $scope, $cookieStore, $cookies,$location) {
 	  $rootScope.coxUrl = "http://192.168.1.36:8080";
-
+    $scope.domain = $location.search().origUrl || $location.host();
     var userinfo = $cookieStore.get("userinfo") || $cookies.userinfo || "{}";
     typeof userinfo == "object" ? $rootScope.userinfo = userinfo : $rootScope.userinfo = JSON.parse(userinfo);
     $scope.isHidden = true;
